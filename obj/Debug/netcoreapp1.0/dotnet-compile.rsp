@@ -1,5 +1,5 @@
---temp-output:/home/zafuzi/Git/dotnet-web-server/obj/Debug/netcoreapp1.0/
---out:/home/zafuzi/Git/dotnet-web-server/bin/Debug/netcoreapp1.0/dotnet-web-server.dll
+--temp-output:/home/zafuzi/Git/elegance/obj/Debug/netcoreapp1.0/
+--out:/home/zafuzi/Git/elegance/bin/Debug/netcoreapp1.0/elegance.dll
 --define:DEBUG
 --define:TRACE
 --define:NETCOREAPP1_0
@@ -9,7 +9,7 @@
 --optimize:False
 --debug-type:portable
 --emit-entry-point:True
---output-name:dotnet-web-server
+--output-name:elegance
 --file-version:1.0.0.0
 --version:1.0.0.0
 --informational-version:1.0.0
@@ -211,7 +211,7 @@
 --reference:/home/zafuzi/.nuget/packages/System.Threading.Timer/4.0.1/ref/netstandard1.2/System.Threading.Timer.dll
 --reference:/home/zafuzi/.nuget/packages/System.Xml.ReaderWriter/4.0.11/ref/netstandard1.3/System.Xml.ReaderWriter.dll
 --reference:/home/zafuzi/.nuget/packages/System.Xml.XDocument/4.0.11/ref/netstandard1.3/System.Xml.XDocument.dll
---resource:"/home/zafuzi/Git/dotnet-web-server/obj/Debug/netcoreapp1.0/dotnet-web-serverdotnet-compile.deps.json",dotnet-web-server.deps.json
-/home/zafuzi/Git/dotnet-web-server/Program.cs
-/home/zafuzi/Git/dotnet-web-server/Startup.cs
-/home/zafuzi/Git/dotnet-web-server/Controllers/HomeController.cs
+--resource:"/home/zafuzi/Git/elegance/obj/Debug/netcoreapp1.0/elegancedotnet-compile.deps.json",elegance.deps.json
+/home/zafuzi/Git/elegance/Program.cs
+/home/zafuzi/Git/elegance/Startup.cs
+/home/zafuzi/Git/elegance/Controllers/HomeController.cs

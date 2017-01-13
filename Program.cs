@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace portfolio
+namespace elegance
 {
     public class Program
     {
