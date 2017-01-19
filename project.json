@@ -5,6 +5,9 @@
     "emitEntryPoint": true,
     "preserveCompilationContext": true
   },
+  "publishOptions": {
+    "include": ["Views", "wwwroot"]
+  },
   "dependencies": {
     "jquery": "3.1.1"
   },
