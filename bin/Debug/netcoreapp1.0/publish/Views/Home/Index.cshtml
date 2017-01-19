@@ -1,0 +1,124 @@
+<div id="main_ui">
+    <div id="user_info">
+        <!-- User Information -->
+        <div>
+            <h2>{{username}}</h2>
+            <p> Current System: {{ current_system }} </p>
+            <p> Inhabited Systems: {{ inhabited_systems }} </p>
+            <p> Probes: {{ probes }} </p>
+            <p> Printers: {{ printers }} </p>
+        </div>
+    </div>
+
+    <div id="material_info">
+        <div class="material" v-for="material in materials">
+            <p class="newline"><small>{{ material.name }}</small></p>
+            <p><strong>{{ material.value.toLocaleString() }}</strong></p>
+        </div>
+    </div>
+
+    <!-- Buy Buttons -->
+    <div id="buy_buttons">
+        <div class="row" v-for="item in items">
+            <div class="row">
+                <h3>{{ item.group_name}}:</h3>
+                <p><span class="newline" v-for="item in item.base_cost">{{item.material}}: {{item.value.toLocaleString()}} </span>                    </p>
+            </div>
+            <button v-for="multiplier in item.multipliers" :disabled="item.methods.canAfford(multiplier, item, materials)" v-on:click="item.methods.buy(multiplier, item)">{{multiplier}} </button>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+<script>
+    $(function () {
+        var ui = new Vue({
+            el: '#main_ui',
+            data: {
+                username: "Zafuzi",
+                inhabited_systems: 1,
+                current_system: "Sol",
+                probes: 1,
+                printers: 1,
+                materials: [
+                    { name: "Metal", value: 100 },
+                    { name: "Electronics", value: 100 },
+                    { name: "Probe Cores", value: 100 },
+                    { name: "Nano Bots", value: 100 }
+                ],
+                items: [
+                    {
+                        group_name: "probes",
+                        multipliers: [1, 10, 100, 1000],
+                        base_cost: [
+                            { key: 0, material: "metal", value: 50 },
+                            { key: 1, material: "electronics", value: 10 },
+                            { key: 2, material: "probe_cores", value: 25 },
+                            { key: 3, material: "nano_bots", value: 20 }
+                        ],
+                        methods: {
+                            buy: function (multiplier, item) {
+                                ui.materials.map((material, key) => {
+                                    material.value -= item.base_cost[key].value * multiplier;
+                                    item.base_cost[key].value += ui.probes / item.base_cost[key].value;
+                                });
+                                ui.probes += multiplier;
+                            },
+                            canAfford: function (multiplier, item, arr) {
+                                isDisabled = false;
+                                arr.map((material, key) => {
+                                    if (material.value < (item.base_cost[key].value * multiplier)) {
+                                        isDisabled = true;
+                                        return;
+                                    }
+                                });
+                                return isDisabled;
+                            }
+                        }
+                    },
+                    {
+                        group_name: "printers",
+                        multipliers: [1, 10, 100, 1000],
+                        base_cost: [
+                            { key: 0, material: "metal", value: 10 },
+                            { key: 1, material: "electronics", value: 15 },
+                            { key: 2, material: "probe_cores", value: 1 },
+                            { key: 3, material: "nano_bots", value: 50 }
+                        ],
+                        methods: {
+                            buy: function (multiplier, item) {
+                                ui.materials.map((material, key) => {
+                                    material.value -= item.base_cost[key].value * multiplier;
+                                    item.base_cost[key].value += ui.probes / item.base_cost[key].value;
+                                });
+                                ui.printers += multiplier;
+                            },
+                            canAfford: function (multiplier, item, arr) {
+                                isDisabled = false;
+                                arr.map((material, key) => {
+                                    if (material.value < (item.base_cost[key].value * multiplier)) {
+                                        isDisabled = true;
+                                        return;
+                                    }
+                                });
+                                return isDisabled;
+                            }
+                        }
+                    }
+                ],
+                methods: {
+                    passiveMine: function () {
+                        setInterval(function () {
+                            ui.materials[0].value += .01 * ui.probes;
+                            ui.materials[1].value += .01 * ui.printers;
+                            ui.materials[2].value += .001 * ui.printers;
+                            ui.materials[3].value += .01 * ui.printers;
+                        });
+                    }
+                }
+            }
+        });
+        window.requestAnimationFrame(ui.methods.passiveMine);
+    });
+</script>
+}

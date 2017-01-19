@@ -1,0 +1,125 @@
+main{
+  margin: 1em;
+  display: flex;
+  font-size: 1rem;
+}
+button{
+  border: none;
+  background: #2ecc71;
+  border-radius: 3px;
+  padding: 1em;
+  margin: .25em;
+  cursor: pointer;
+  max-height: 50px;
+}
+button:active{
+  box-shadow: -.1em -.1em .1em #9e9e9e;
+}
+button:focus{
+  outline: 1px solid #9e9e9e;
+}
+button:disabled{
+  cursor: not-allowed;
+  background: #ecf0f1;
+}
+#main_ui{
+  display: inline-flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: center;
+}
+#user_info{
+  width: 100%;
+  flex: 100%;
+  margin-bottom: 1em;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}
+#user_info p{
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  display: inline-flex;
+  flex-flow: row wrap;
+  min-width: 100px;
+  align-items: center;
+  justify-content: center;
+}
+#buy_buttons{
+  padding: 1em;
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+#material_info{
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  flex-flow: row wrap;
+}
+.material{
+  margin: .25em;
+  padding: 0;
+  border: 1px solid #9e9e9e;
+  border-radius: 3px;
+  width: calc(25% - 1em);
+  display: inline-flex;
+  flex-flow: column;
+  flex: calc(25% - 1em);
+  height: 75px;
+  align-items: center;
+  justify-content: center;
+}
+.material p{
+  flex-basis: 75%;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.row{
+  width: 100%;
+  flex-flow: row wrap;
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+  text-align: left;
+}
+.row p{
+  width: 100%;
+  display: block;
+}
+.row button{
+  width: calc(25% - 1em);
+}
+
+.newline{
+  display: flex;
+  flex: 100%;
+  width: 100%;
+}
+
+@media(max-width:768px){
+  .row button{
+    width: calc(50% - 1em);
+  }
+  #buy_buttons{
+    width: 100%;
+  }
+  #material_info{
+    width: 100%;
+  }
+  .material{
+    width: calc(50%-1em);
+    flex: calc(50%-1em);
+  }
+}
