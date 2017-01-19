@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace elegance.controllers{
+namespace imitator.controllers{
     public class HomeController : Controller{
         public IActionResult Index(){
             return View();

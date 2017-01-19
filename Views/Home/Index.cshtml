@@ -1,90 +1,125 @@
-<div class="centered text-center landing-content">
-    <h1>
-        Shear
-        <span class="blue">Elegance</span>
-    </h1>
-    <a href="#about" class="btn btn-outline">learn more</a>
+<div id="main_ui">
+    <div id="user_info">
+        <!-- User Information -->
+        <div>
+            <h2>{{username}}</h2>
+            <p> Current System: {{ current_system }} </p>
+            <p> Inhabited Systems: {{ inhabited_systems }} </p>
+            <p> Probes: {{ probes }} </p>
+            <p> Printers: {{ printers }} </p>
+        </div>
+    </div>
+
+    <div id="material_info">
+        <div class="material" v-for="material in materials">
+            <p class="newline"><small>{{ material.name }}</small></p>
+            <p><strong>{{ material.value.toLocaleString() }}</strong></p>
+        </div>
+    </div>
+
+    <!-- Buy Buttons -->
+    <div id="buy_buttons">
+        <div class="row" v-for="item in items">
+            <div class="row">
+                <h3>{{ item.group_name}}:</h3>
+                <p><span class="newline" v-for="item in item.base_cost">{{item.material}}: {{item.value.toLocaleString()}} </span> </p>
+            </div>
+            <button v-for="multiplier in item.multipliers" :disabled="item.methods.canAfford(multiplier, item, materials)" v-on:click="item.methods.buy(multiplier, item)">{{multiplier}} </button>
+        </div>
+    </div>
+
 </div>
-<!-- About Section -->
-<section class="row section" id="about">
-    <article class="container text-left">
-        <h2>About Us</h2>
-    </article>
-    <article class="container text-left">
-        <p class="col-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        </p>
-    </article>
-</section>
+@section scripts{
+<script>
+    var ui = new Vue({
+        el: '#main_ui',
+        data: {
+            username: "Zafuzi",
+            inhabited_systems: 1,
+            current_system: "Sol",
+            probes: 1,
+            printers: 1,
+            materials: [
+                { name: "Metal", value: 100 },
+                { name: "Electronics", value: 100 },
+                { name: "Probe Cores", value: 100 },
+                { name: "Nano Bots", value: 100 }
+            ],
+            items: [
+                {
+                    group_name: "probes",
+                    multipliers: [1, 10, 100, 1000],
+                    base_cost: [
+                        { key: 0, material: "metal", value: 50 },
+                        { key: 1, material: "electronics", value: 10 },
+                        { key: 2, material: "probe_cores", value: 25 },
+                        { key: 3, material: "nano_bots", value: 20 }
+                    ],
+                    methods: {
+                        buy: function (multiplier, item) {
+                            ui.materials.map((material, key) => {
+                                material.value -= item.base_cost[key].value * multiplier;
+                                item.base_cost[key].value += ui.probes / item.base_cost[key].value;
+                            });
+                            ui.probes += multiplier;
+                        },
+                        canAfford: function (multiplier, item, arr) {
+                            isDisabled = false;
+                            arr.map((material, key) => {
+                                if (material.value < (item.base_cost[key].value * multiplier) ) {
+                                    isDisabled = true;
+                                    return;
+                                }
+                            });
+                            return isDisabled;
+                        }
+                    }
+                },
+                {
+                    group_name: "printers",
+                    multipliers: [1, 10, 100, 1000],
+                    base_cost: [
+                        { key: 0, material: "metal", value: 10 },
+                        { key: 1, material: "electronics", value: 15 },
+                        { key: 2, material: "probe_cores", value: 1 },
+                        { key: 3, material: "nano_bots", value: 50 }
+                    ],
+                    methods: {
+                        buy: function (multiplier, item) {
+                            ui.materials.map((material, key) => {
+                                material.value -= item.base_cost[key].value * multiplier;
+                                item.base_cost[key].value += ui.probes / item.base_cost[key].value;
+                            });
+                            ui.printers += multiplier;
+                        },
+                        canAfford: function (multiplier, item, arr) {
+                            isDisabled = false;
+                            arr.map((material, key) => {
+                                if (material.value < (item.base_cost[key].value * multiplier) ) {
+                                    isDisabled = true;
+                                    return;
+                                }
+                            });
+                            return isDisabled;
+                        }
+                    }
+                }
+            ],
+            methods: {
+                passiveMine: function () {
+                    setInterval(function () {
+                        ui.materials[0].value += .01 * ui.probes;
+                        ui.materials[1].value += .01 * ui.printers;
+                        ui.materials[2].value += .001 * ui.printers;
+                        ui.materials[3].value += .01 * ui.printers;
+                    });
+                }
+            }
+        }
+    });
 
-<!-- Services Section -->
-<section class="row section" id="services">
-    <article class="container text-left">
-        <h2>Our Services</h2>
-    </article>
-    <article class="container">
-        <div class="row service">
-            <h5 class="col-12">The Basics</h5>
-            <img class="col-2" src="~/images/scissors.svg" />
-            <div class="col-9">
-                <p>Let our experienced master stylists give you the hair style you’ve always wanted.</p>
-                <p>
-                    <small>For men, women, and children</small>
-                </p>
-            </div>
-        </div>
-
-        <div class="row service">
-            <h5 class="col-12">Full Service</h5>
-            <img class="col-2 blue" src="~/images/shampoo.svg" />
-            <p class="col-9">Relax, revitalize, and refresh with a pampered wash, fresh cut, and excellent styling.</p>
-        </div>
-
-        <div class="row service">
-            <h5 class="col-12">Color, Foils, and Highlights</h5>
-            <img class="col-2" src="~/images/color.svg" />
-            <div class="col-9">
-                <p>- Deluxe, permanent color treatment leaves hair looking and feeling luxurious.</p>
-                <p>- Perfect mix of highlights and lowlights for a striking, yet natural look.</p>
-                <p>- Conditioning care or color refresh to keep hair vibrant.</p>
-            </div>
-        </div>
-
-        <div class="row service">
-            <h5 class="col-12">Chi Thermal Straightening</h5>
-            <img class="col-2" src="~/images/straight.svg" />
-            <div class="col-9">
-                <p>Get your frizzy, curly, wavy, and even straight course hair under control. With a Chi Thermal Straightening
-                    you get a permanent straightening service, a deep conditioner, and a reconstruction service all in one!
-                </p>
-                <p>You can color or even highlight your hair after the service, and it can be done on hair that has been permed,
-                    relaxed, colored, or highlighted.</p>
-            </div>
-        </div>
-
-    </article>
-</section>
-
-<!-- About Section -->
-<section class="row section" id="contact">
-    <article class="container text-left">
-        <h2 class="center">
-            Contact Us
-        </h2>
-    </article>
-    <article class="container text-left">
-        <div class="col-6">
-
-            <h5>Hours</h5>
-            <p>Monday-Saturday | 10am to 6pm</p>
-            <p>Sunday's | Closed</p>
-
-            <address>
-                <a href="https://www.google.com/maps/place/32+NE+Silver+Pine+Dr+%23106,+Bremerton,+WA+98311/data=!4m2!3m1!1s0x54903a44b8e0cdd7:0x33b7a84c868b6dd8?sa=X&ved=0ahUKEwiwke2l87_NAhUU8GMKHaVPAEAQ8gEIHTAA">32 Silver Pine Drive, Suite 106 Bremerton, Wa 98311</a>
-            </address>
-
-            <a href="tel:1-360-204-1393">(360)204-1393</a>
-        </div>
-    </article>
-
-</section>
+    $(function () {
+        window.requestAnimationFrame(ui.methods.passiveMine);
+    });
+</script>
+}

@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Shear Elegance | Hair Salon</title>
+    <title>Imitator</title>
     <link href="~/styles/normalize5.css" rel="stylesheet">
-    <link href="~/styles/wing.min.css" rel="stylesheet">
     <link href="~/styles/styles.css" rel="stylesheet">
 </head>
 
@@ -14,59 +13,15 @@
     <span id="home"></span>
 
     <header class="">
-        <nav class="navbar navabar-clear container">
-            <div class="row">
-                <a href="#" class="nav-button col-3">home</a>
-                <a href="#about" class="nav-button col-3">about</a>
-                <a href="#services" class="nav-button col-3">services</a>
-                <a href="#contact" class="nav-button col-3">contact</a>
-            </div>
-        </nav>
 
     </header>
-    <main>
+    <main id="main">
         @RenderBody()
-
-        <div class="credit ">Icons made by
-            <a href="http://www.freepik.com" title="Freepik">Freepik</a> from
-            <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by
-            <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-        </div>
     </main>
     <script src="~/scripts/jquery-3-1-1.min.js"></script>
-    <script async defer type="text/javascript">
-      WebFontConfig = {
-        google: {
-          families: ['Roboto:400,500:latin', 'Lato:400,300,700:latin', 'Great+Vibes::latin']
-        }
-      };
-      (function () {
-        var wf = document.createElement('script');
-        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-      })();
-    </script>
-    <script async defer>
-      $(function () {
-        $('a[href*="#"]:not([href="#"])').click(function () {
-          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-            var target = $(this.hash);
-            target = target.length
-              ? target
-              : $('[name=' + this.hash.slice(1) + ']');
-            if (target.length) {
-              $('html, body').animate({
-                scrollTop: target.offset().top
-              }, 1000);
-              return false;
-            }
-          }
-        });
-      });
-    </script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="~/scripts/phaser.min.js"></script>
+    @RenderSection("scripts", required:false)
 </body>
 
 </html>

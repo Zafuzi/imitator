@@ -1,0 +1,73 @@
+/* https://apps.olympic.edu/canvas/k12_overrides.css */
+
+
+/*Main Site Header Styles*/
+#header{background: url("hbg.png") repeat-x;}
+
+/*replace the canvas logo with your logo*/
+ #header-logo, #header.no-user #header-logo {background: url("OC_logo_cmyk.png") no-repeat scroll 0 0 transparent;bottom: 20px;height: 33px;left: 15px;width: 144px;}
+
+/*if you replace the left canvas logo, move a smaller one to the right side of the header--I made the image gray first*/
+ #header-logo-secondary {background: url("canvaslogo.png?") no-repeat scroll 0 0 transparent;bottom: 11px;height: 26px;position: absolute;right: 160px;width: 110px; display: block;}
+
+/*if your logo is bigger, you can make room like this*/
+ #menu { margin-left; 200px; }
+
+/*change the identity bar (the area that says "Hilary Scharton Inbox Settings Logout Help)*/
+ #identity {background-image: none;background-color: #fff;}
+
+/*change the color of the identity text*/
+ #identity a { color: #000; }
+ /*change the color of the circle around the number of unread inbox messages*/
+ #identity .inbox a .unread-messages-count { background-color: #d81b08; color:#fff;}
+ /*#identity #identity-help-container a { color: #fff; }*/
+
+/*change the color of the menu items (courses & groups etc.). If the text looks fuzzy, remove the text shadow.*/
+ .menu-item .menu-item-title, .menu-item .menu-item-no-drop {color: #000;text-shadow: none;}
+ .ic-app-header__main-navigation { background-color: #919191;}
+ 
+ 
+/*****************************************************************************/
+
+
+/*login box*/
+/*#modal-box { background: url("Slide1.jpg?v1") no-repeat !important }*/
+#modal-box { background: url("BG05.png") no-repeat !important; }
+
+/*this will remove the extra canvas logo*/
+body.modal #modal-box.login-box h1 {background: none;}
+
+/*resize the login box to fit my image and change the color of 'stay signed in'*/
+body.modal #modal-box.login-box {height: 305px;width: 545px;color: #2784A0;padding:0 !important; margin-top:125px !important;}
+
+/*change the color of the login button*/
+body.modal #modal-box .button, body.modal #login-box .button{background-color: #d81e05 !important;background-image: none;border-color: #d81e05;margin-top:-8px !important;
+  padding:7px 26px !important;box-shadow:1px 1px 5px #000000 !important;}
+
+/*change the color of 'don't know your password'*/
+body.modal #modal-box.login-box a { color: #d81e05 !important;}
+
+/*****Added CSS for styling sign-in options*****/
+body.modal .login-box#modal-box input.text{outline:none;}
+.login-options{margin-left:5px !important;color:#000 !important;font-size:10px !important;margin-top:-10px !important;}
+.login-options input{vertical-align:middle;}
+input[type='text'], input[type='password']{box-shadow:none !important;}
+body.modal #footer{width:100% !important; margin-left:auto !important; margin-right:auto !important; text-align:center !important;} /*Comment out after inserting our own footer links*/
+#footer img{padding: 0 10px 3px 0 !important;} /*Uncomment after inserting our own footer links*/
+#content{padding-bottom:0 !important;}
+.loginNote
+{
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	color: #5c5c5c;
+	line-height: 1.5;
+	font-family: "Helvetica Neue", Arial, "Liberation Sans", FreeSans, sans-serif;
+	font-size: 11px;
+
+	border: 1px solid #5c5c5c;
+	padding:5px;
+	background-color:#fff;
+	width:450px;
+
+}
