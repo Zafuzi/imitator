@@ -13,7 +13,7 @@
     <div id="material_info">
         <div class="material" v-for="material in materials">
             <p class="newline"><small>{{ material.name }}</small></p>
-            <p><strong>{{ material.value.toLocaleString() }}</strong></p>
+            <p><strong>{{ material.value.toFixed(0) }}</strong></p>
         </div>
     </div>
 
@@ -22,7 +22,7 @@
         <div class="row" v-for="item in items">
             <div class="row">
                 <h3>{{ item.group_name}}:</h3>
-                <p><span class="newline" v-for="item in item.base_cost">{{item.material}}: {{item.value.toLocaleString()}} </span>                    </p>
+                <p><span class="newline" v-for="item in item.base_cost">{{item.material}}: {{item.value.toFixed(0)}} </span>                    </p>
             </div>
             <button v-for="multiplier in item.multipliers" :disabled="item.methods.canAfford(multiplier, item, materials)" v-on:click="item.methods.buy(multiplier, item)">{{multiplier}} </button>
         </div>
@@ -109,10 +109,10 @@
                 methods: {
                     passiveMine: function () {
                         setInterval(function () {
-                            ui.materials[0].value += .01 * ui.probes;
-                            ui.materials[1].value += .01 * ui.printers;
-                            ui.materials[2].value += .001 * ui.printers;
-                            ui.materials[3].value += .01 * ui.printers;
+                            ui.materials[0].value += .005 * ui.probes;
+                            ui.materials[1].value += .005 * ui.printers;
+                            ui.materials[2].value += .005 * ui.printers;
+                            ui.materials[3].value += .005 * ui.probes;
                         });
                     }
                 }
